@@ -1,0 +1,271 @@
+{
+  "info": {
+    "_postman_id": "b76e534a-3ffc-44ad-8db1-9ac830a005a3",
+    "name": "MATalogics Internship Collection",
+    "description": "Day-03 Module 3 practice collection. Demonstrates GET, POST, collection variables, authorization and export using the public JSONPlaceholder test API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "practiceUrl",
+      "value": "https://jsonplaceholder.typicode.com",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "demo-bearer-token-12345",
+      "type": "string"
+    },
+    {
+      "key": "postId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "GET - Practice (fetch a post)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{practiceUrl}}/posts/{{postId}}",
+          "host": [
+            "{{practiceUrl}}"
+          ],
+          "path": [
+            "posts",
+            "{{postId}}"
+          ]
+        },
+        "description": "Demonstrates a GET request plus the {{postId}} collection variable."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Response has an id\", function () {",
+              "    pm.expect(pm.response.json()).to.have.property(\"id\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET - Practice (list all posts)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{practiceUrl}}/posts",
+          "host": [
+            "{{practiceUrl}}"
+          ],
+          "path": [
+            "posts"
+          ]
+        },
+        "description": "Demonstrates a GET request returning a collection of resources."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST - Practice (create a post)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{practiceUrl}}/posts",
+          "host": [
+            "{{practiceUrl}}"
+          ],
+          "path": [
+            "posts"
+          ]
+        },
+        "description": "Demonstrates a POST request with a JSON body and Content-Type header.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"MATalogics Internship\",\n  \"body\": \"Day-03 Postman practice request\",\n  \"userId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 201 Created\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PUT - Practice (update a post)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{practiceUrl}}/posts/{{postId}}",
+          "host": [
+            "{{practiceUrl}}"
+          ],
+          "path": [
+            "posts",
+            "{{postId}}"
+          ]
+        },
+        "description": "Demonstrates a PUT request updating an existing resource.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 1,\n  \"title\": \"Updated title\",\n  \"body\": \"Updated body\",\n  \"userId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "DELETE - Practice (delete a post)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{practiceUrl}}/posts/{{postId}}",
+          "host": [
+            "{{practiceUrl}}"
+          ],
+          "path": [
+            "posts",
+            "{{postId}}"
+          ]
+        },
+        "description": "Demonstrates a DELETE request."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

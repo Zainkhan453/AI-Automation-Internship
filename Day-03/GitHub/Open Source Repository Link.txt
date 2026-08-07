@@ -1,0 +1,48 @@
+OPEN SOURCE REPOSITORY
+======================
+
+Repository Name : n8nworkflows.xyz
+Original URL    : https://github.com/nusquama/n8nworkflows.xyz
+Workflow Studied: AI Client Onboarding Agent - Auto Welcome Email Generator
+Direct Link     : https://github.com/nusquama/n8nworkflows.xyz/tree/main/workflows/%20AI%20Client%20Onboarding%20Agent%3A%20Auto%20Welcome%20Email%20Generator-4448
+Topic Category  : AI Automation / AI Agents / n8n
+
+
+WHAT THE PROJECT DOES
+---------------------
+n8nworkflows.xyz is a community collection of ready-to-import n8n workflow
+templates. Each workflow is stored as a JSON file that can be imported directly
+into an n8n instance, letting people reuse an automation instead of building it
+from scratch.
+
+The workflow I studied automates client onboarding. When a new client fills in a
+form that writes to a Google Sheet, the workflow picks up the new row, extracts
+the client's details, combines them with a standard onboarding checklist, sends
+that to an OpenAI-powered AI Agent to write a personalised welcome email, and
+sends the email through Gmail.
+
+
+WHY I CHOSE IT
+--------------
+It combines the things I learned on Day 3 - triggers, Google Sheets as a data
+source, and structured data flowing between nodes - with an AI Agent, which is
+the core subject of this internship. It is also small enough (6 nodes) to fully
+understand and audit.
+
+
+PROJECT STRUCTURE
+-----------------
+  workflows/     JSON workflow templates, one folder per workflow
+  README.md      project overview and import instructions
+
+Node flow of the workflow studied:
+
+  Google Sheets Trigger (new row)
+        v
+  Extract and Structure Client Data  (Set node)
+        v
+  Client Checklist                   (Set node)
+        v
+  AI Agent  <--- OpenAI Chat Model (gpt-5-mini)
+        v
+  Send Email to Client               (Gmail)

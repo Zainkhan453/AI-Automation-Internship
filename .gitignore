@@ -1,0 +1,9 @@
+# Postman workspace metadata
+.postman/
+
+# Exploration files, not part of the Day-03 submission
+Day-03/GitHub/Contribution/ComfyUI/
+
+# OS files
+Thumbs.db
+desktop.ini

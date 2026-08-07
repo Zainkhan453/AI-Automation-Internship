@@ -1,0 +1,19 @@
+FORKED REPOSITORY
+=================
+
+Original Repo : https://github.com/nusquama/n8nworkflows.xyz
+My Fork URL   : https://github.com/zainkhan453/n8nworkflows.xyz
+Branch Used   : feature/fix-onboarding-agent-field-mapping
+
+
+COMMANDS USED
+-------------
+git clone https://github.com/zainkhan453/n8nworkflows.xyz.git
+cd n8nworkflows.xyz
+git checkout -b feature/fix-onboarding-agent-field-mapping
+
+  ... applied the fixes described in Pull Request Link.txt ...
+
+git add .
+git commit -m "fix: align Google Sheet column references across onboarding agent nodes"
+git push origin feature/fix-onboarding-agent-field-mapping

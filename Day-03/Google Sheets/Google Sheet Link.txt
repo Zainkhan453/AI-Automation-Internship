@@ -1,0 +1,29 @@
+GOOGLE SHEET - LEAD MANAGEMENT
+==============================
+
+Sheet Name     : Lead Management
+Tab Name       : Sheet1
+Spreadsheet ID : 1Zl4msfwtlmxEVuPrnaJKjPW0D-ePOkjAGKbdsfsWw74
+Sheet URL      : https://docs.google.com/spreadsheets/d/1Zl4msfwtlmxEVuPrnaJKjPW0D-ePOkjAGKbdsfsWw74/edit
+
+Sharing        : set to "Anyone with the link -> Viewer" so it can be reviewed
+
+Column headers (row 1, must match EXACTLY)
+------------------------------------------
+A: Name
+B: Email
+C: Phone
+D: Company
+E: Interest
+F: Created At
+
+These header names are referenced directly by the six Google Sheets nodes in
+the n8n workflow. Any difference in spelling, spacing or capitalisation
+produces blank columns or a failed lookup.
+
+Used by
+-------
+POST   /create-lead   appends a row
+GET    /get-leads     reads all rows
+PUT    /update-lead   updates the row matching Email
+DELETE /delete-lead   deletes the row matching Email

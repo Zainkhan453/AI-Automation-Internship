@@ -1,0 +1,238 @@
+{
+  "info": {
+    "_postman_id": "58aba1d7-ff6c-4af8-977d-00c409ad89a7",
+    "name": "MATalogics Lead Management API",
+    "description": "Day-03 internship assignment. A Lead Management REST API built on n8n webhooks with Google Sheets as the data store.\n\nSet the collection variable `baseUrl` to your n8n production webhook base, e.g. https://your-instance.app.n8n.cloud/webhook",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{apiKey}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://zonix89.app.n8n.cloud/webhook",
+      "type": "string"
+    },
+    {
+      "key": "apiKey",
+      "value": "REPLACE_WITH_YOUR_API_KEY",
+      "type": "string"
+    },
+    {
+      "key": "leadEmail",
+      "value": "zainkhanbaloch453@gmail.com",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "POST - Create Lead",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/create-lead",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "create-lead"
+          ]
+        },
+        "description": "Creates a new lead and appends it as a row in the Lead Management Google Sheet. Returns 201 on success, 400 if name or email is missing.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Zain Khan\",\n  \"email\": \"{{leadEmail}}\",\n  \"phone\": \"+923088320756\",\n  \"company\": \"MATalogics\",\n  \"interest\": \"AI Automation-Intern\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 201 Created\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "pm.test(\"Response reports success\", function () {",
+              "    pm.expect(pm.response.json().success).to.eql(true);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET - Get All Leads",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/get-leads",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "get-leads"
+          ]
+        },
+        "description": "Returns every lead row currently stored in the Google Sheet."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Response is an array\", function () {",
+              "    pm.expect(pm.response.json()).to.be.an('array');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PUT - Update Lead",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/update-lead",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "update-lead"
+          ]
+        },
+        "description": "Finds the row matching the given email and updates phone, company and interest. Returns 404 if no lead matches.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{leadEmail}}\",\n  \"phone\": \"+923111111111\",\n  \"company\": \"MATalogics Pvt Ltd\",\n  \"interest\": \"AI Agents\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "DELETE - Delete Lead",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/delete-lead",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "delete-lead"
+          ]
+        },
+        "description": "Finds the row matching the given email and deletes it. Returns 404 if no lead matches.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{leadEmail}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
